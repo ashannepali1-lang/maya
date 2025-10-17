@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Yeshan</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("a.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Yeshan Special Edition 
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Hamro vet aba suru ma anjan manxey haru jasto vako thiyo. But, hamro yo vet yeuta yesto special moment ma change hunxa vanni tha nai thiyena.
+
+        Jaba hamro Conversation start vako thiyo, tmrw tyo bolni tarika, tmrw habits, and tmrw yo duniya lai herne najar ko bayan jati garyani kam xa.
+        
+       yo kei sabdha haru matra haina; yo yeuta sano tarika ho tmi kati special xaw mero lagi vanna lai ❤️‍🔥. jun tarika ley tmiley malai samjhauxaw, it is very special.
+        
+        So, aba tmrw rw mero vet ko kura suru hunxa, hamro bond, rw hamro tyo beautiful moments aaudai xa. 💖</p>
+
+          <p>
+             <br />hamro vet suruma Tiktok ma vako thiyo
+            on September 4th, 2025, ....
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>Anjan bta special ek arka ko lagi ❤️✨</h2>
+          <p>
+            Ekchoti lai sochda pani, kehi din aagadi, maile tmilai chindani chinthina. tmilai tiktok bta vetna  mero bhagya manxu rw juni vari lai samjhanxu.
+
+suru ma, suru ma tmilai text garam ki nagarm hunthyo, garyani k vanera garni lauthyo, tmi kasto type ko xaw jasto lauthyo. But now, tmi snga time spend garda, bujhya ki tmi ekdam special xaw. 💖
+
+tmrw sabda, tmrw kindness, rw jun tarika ley muskurauxaw mero mutu ma thaw banaisakeko thiyp. maile tmi jasto manxey pauxu vanni sochekoni thiyena, but now, tarw aba tmi mero life ma nahuni sochnani sakdina.
+
+sayad yo bhagya ho, ki mero luck ho, ma khusi xu bhagya ley tmilai vetayeko ma. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="e.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            Tmi ma yeuta xuttai chamak xa jun maile sabda ma bayan garna sakdina, tmi ma yesto special chiz jun ma jati vanerani sakdina.
+
+            Tmi jasto manxey aaile samma maile veteko nai xaina ❤️.
+            
+           maile sochxu ki bhagya ley tmilai vetauni vanera kura=dai thiyo mero life lai aajhai ujhyalp banauna rw vako ni xa. tmrw harek msg tmrw harek voice calls and everything ley mero life lai ujhyalo banaudai gaxa.
+            
+            tmi mw snga huda mero harek moment special hunxa tmrw bolni bani tmiley jasari harek kura bujhxaw sab special ho.
+            
+            jati belani maile tmilai dekhxu tmrw prati maya baddai gairakhxa sochxu ki mero life mani koi yesto special xa jasaley mero ekdamai care garxa. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength Within You 💫✨</h2>
+          <p>
+            tmrw sundarta bahek ni tmi ekdamai strong xaw tmrw tyo hardwork ley jhan tmi prati mero samman badauxa. tmi yesto special xaw ki tmrw tyo hardwoek dekhera tmi snga inspiration lina sakinxa. Jun tarika ley tmi dedicated xaw, rw jun tarika ley tmiley kam handle garxaw tmi prati mero respect jhan baddai janxa.
+
+            jati garo kam vaye pani jun tarika ley tmiley teslai handle garxaw rw testo kam hudani jati tmiley mw prati efforts dekhauxaw tesley garda tmrw barema yaad aairakhaxa 24 hours.
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+           jun tarrika ley tmiley plans banauxaw kura garxaw harek kura ma malai special manxaw tesley garda mero life jhan ujhyalo hudai janxa.
+
+            jun tarika ley tmiley sano vanda sano moments special banauxaw.
+            .
+            
+            Malai paila tha thiyena ki koi snga bolda yeti special feel hunxa vanera, tarw tmi snga bolda, hunxa vanni tha vayo. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="b.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+            kei bela , ma wish garxu ki tmilai real ma veti halna paye, tmrw tyo muskan ley mero harek day ramro banaidinthyo. tarw yo pura huna ekdamai tarw yo pura huna aajhai dherai nai time baki xa.
+
+            Ehamiley ekarka lai chineko dherai navaye pani, ma hope garxu ki tmiley malai kaile nabirsinu. hamro tyo moments hamro tyo conversation ekdam mai important xa jun tmilai thaxaina hola.
+            
+            tarw j vaye pani, ma wish garxu tmrw tyo life jun khusi ley varipuda hos. 💕
+            
+           tmi mero lagi lastai special xaw, rw hope garxu ki yo life ma tmiley khusi matra paos. mw yeuta kura wish garxu ki hamro vet xito vanda xito hos real ma. ✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            tmi yeuta inspiration haw mero lagi. rw suna j vaye pani ma tmi snga hunxu jaile kaile pani xodera jana sakdina. rw kei kura man ma xa ya kei kura vaxa vnya malai message garna nabhula tmrw harek khusi rw dukha ko kura sunna tayar xu ma.
+
+            Mero samaye tmrw ho jati bela chaiye pani.
+            
+            Life ko var xaina , tarw tmi kaile ni alone feel nagara. tmrw jun din naramro hunxa rw garo hunxa socha ki ma xu tmrw support ma.
+            tmiley khusi matra deserve garxaw rw mw xu tmrw carre ko lagi rw support ko lagi chai kahile nabulnu lw.💕
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+            rw kehi time nikalera kura garam ki tmiley j lagaye pani tmi kati ramri dekhinxaw vanni. tyo kapda ley matra haina ki tmrw himmat ley ho, tmrw tyo sundarta kahile birsina sakdina ma.
+            
+            tmi ma kei tw special xa tesaila tmi prati yeti maya lagxa. sochxu ki tmi jun parni room ma basxaw tyo room tmrw tyo charam ley ujyalo huna pugxa.
+            
+            tarw sundarata bahek ni , tmiley jun daya garxaw aru prati teskoni xuttai cahmak xa. Tmi ekdamai precious xaw mero lai.
+            
+            tmiley harek moment lai bujhni mero kura lai bujhni rw tmrw tyo funny kura haruley , tmi kati precious haw jasto lagxa jaile pani. 💖✨
+          </p>
+        </div>
+        <div class="back">
+          <h2>Absolutely Breathtaking ✨💖</h2>
+          <p>
+
+            mw tmi mai purai sansar dekheko xu.
+            
+            jun tarika ley tmiley malai bujhxaw mw prati maya dekhauxaw tesley garda tmilai kaile pani gumauna naparos vanni man ma matra vairakhxa.
+            
+            tmiley jun tarika ley herxaw tesley garda tmrw tyo aakha ma dubeko xu mw. 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+            mw tmi prati avari xu ki tmi jasto manxey mero life ma aayew ma aafulai ekdamai lucky manxu ki tmi jasto manxey pani mero life ma xa. ❤️
+
+            tmilai vetnu vaneko mero life ko sabai vanda thulo gift manxu mw.❤️‍🔥
+            
+            
+           koi manxey ley mutu ma xap xodxan vathya jun madhya tmi yeuta xaw . 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>jun din bta hamiley kura garana suru garem tei day bta nai tmi mero lagi speical xaw vanni thaneko xu .
+
+            tmiley mero life ujhyalo banako xaw rw mero harek day ramro.
+            
+            future k hunxa thaxaina but tmi mero sath ma jaile pani hunu vanni socheko xu rw hamro future maya ley varipuda banauni socheko xu.
+
+            so, last ma vanna chahanxu ki
+            
+            K tmi Mrs.Yeshan Neplai banna chanxaw rw mero jiban vari sath dinxaw Madam ji (Prateema Nepali)💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="h.jpg" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>Cutest Queen</h3>
+          <p>
+            Content:By Yeshan Nepali<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
